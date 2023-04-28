@@ -15,5 +15,9 @@ class Specialist extends Model
         'fee',
     ];
 
-    // TODO: add relations 
+    // TODO: add relations
+    public function doctors()
+    {
+        return $this->hasMany(Doctor::class);
+    }
 }

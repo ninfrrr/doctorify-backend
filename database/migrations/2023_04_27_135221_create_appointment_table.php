@@ -28,7 +28,7 @@ return new class extends Migration
 
             // Relation to User and Doctor
             $table->foreignId('user_id')->constrained();
-            $table->foreignId('doctor_id')->constrained();
+            $table->foreignId('doctor_id')->constrained('doctor');
 
             $table->softDeletes();
             $table->timestamps();

@@ -22,4 +22,13 @@ class Doctor extends Model
     ];
 
     // TODO: add relations
+    public function specialist()
+    {
+        return $this->belongsTo(Specialist::class);
+    }
+
+    public function appointments()
+    {
+        return $this->hasMany(Appointment::class);
+    }
 }
