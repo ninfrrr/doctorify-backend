@@ -11,7 +11,7 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('appointment', function (Blueprint $table) {
+        Schema::create('appointments', function (Blueprint $table) {
             $table->id();
 
             // Subject
@@ -27,8 +27,8 @@ return new class extends Migration
             $table->integer('total_price')->default(0);
 
             // Relation to User and Doctor
-            $table->foreignId('user_id')->constrained();
-            $table->foreignId('doctor_id')->constrained('doctor');
+            $table->foreignId('user_id')->constrained('users');
+            $table->foreignId('doctor_id')->constrained('doctors');
 
             $table->softDeletes();
             $table->timestamps();
@@ -40,6 +40,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('appointment');
+        Schema::dropIfExists('appointments');
     }
 };
