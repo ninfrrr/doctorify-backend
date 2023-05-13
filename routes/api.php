@@ -2,6 +2,7 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\API\SpecialistController;
 
 /*
@@ -24,9 +25,4 @@ Route::name('auth.')->group(function () {
         Route::post('logout', [UserController::class, 'logout'])->name('logout');
         Route::get('user', [UserController::class, 'fetch'])->name('fetch');
     });
-});
-
-// Specialist API
-Route::prefix('specialist')->name('specialist')->group(function () {
-    Route::post('', [SpecialistController::class, 'create']);
 });
