@@ -16,12 +16,12 @@ return new class extends Migration
 
             $table->foreignId('specialist_id')->constrained('specialists');
 
-            $table->string('name');
+            $table->string('name')->unique();
             $table->string('location');
             $table->text('photo')->nullable();
 
             $table->integer('price')->default(0);
-            $table->text('review');
+            $table->text('review')->nullable();
             $table->double('star')->default(0);
             $table->integer('total_review')->default(0);
 
