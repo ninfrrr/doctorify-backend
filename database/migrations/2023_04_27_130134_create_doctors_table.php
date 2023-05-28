@@ -25,7 +25,6 @@ return new class extends Migration
             $table->double('star')->default(0);
             $table->integer('total_review')->default(0);
 
-            $table->softDeletes();
             $table->timestamps();
         });
     }
