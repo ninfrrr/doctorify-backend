@@ -19,8 +19,8 @@ return new class extends Migration
             $table->string('explanation');
 
             // Start and end date
-            $table->date('start_date');
-            $table->date('end_date');
+            $table->date('date');
+            $table->time('time');
             $table->string('location')->nullable()->default('online');
 
             // Total Price

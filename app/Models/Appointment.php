@@ -15,8 +15,8 @@ class Appointment extends Model
         'doctor_id',
         'subject',
         'explanation',
-        'start_date',
-        'end_date',
+        'date',
+        'time',
         'location',
         'total_price',
     ];
