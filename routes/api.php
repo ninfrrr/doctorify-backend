@@ -41,7 +41,7 @@ Route::prefix('specialist')->name('specialist.')->middleware('auth:sanctum')->gr
 Route::prefix('doctor')->name('doctor.')->middleware('auth:sanctum')->group(function () {
     Route::get('', [DoctorController::class, 'fetch'])->name('fetch');
     Route::post('', [DoctorController::class, 'create'])->name('create');
-    Route::put('update/{id}', [DoctorController::class, 'update'])->name('edit');
+    Route::post('update/{id}', [DoctorController::class, 'update'])->name('edit');
     Route::delete('{id}', [DoctorController::class, 'delete'])->name('delete');
 });
 
