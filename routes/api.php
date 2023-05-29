@@ -30,7 +30,7 @@ Route::name('auth.')->group(function () {
 });
 
 // Specialist API
-Route::prefix('specialist')->name('specialist.')->middleware('auth:sanctum')->group(function () {
+Route::prefix('specialist')->name('specialist.')->middleware('auth:sanctum', 'admin')->group(function () {
     Route::get('', [SpecialistController::class, 'fetch'])->name('fetch');
     Route::post('', [SpecialistController::class, 'create'])->name('create');
     Route::put('update/{id}', [SpecialistController::class, 'update'])->name('edit');
@@ -39,10 +39,12 @@ Route::prefix('specialist')->name('specialist.')->middleware('auth:sanctum')->gr
 
 // Doctor API
 Route::prefix('doctor')->name('doctor.')->middleware('auth:sanctum')->group(function () {
+    Route::middleware('admin')->group(function () {
+        Route::post('', [DoctorController::class, 'create'])->name('create');
+        Route::post('update/{id}', [DoctorController::class, 'update'])->name('edit');
+        Route::delete('{id}', [DoctorController::class, 'delete'])->name('delete');
+    });
     Route::get('', [DoctorController::class, 'fetch'])->name('fetch');
-    Route::post('', [DoctorController::class, 'create'])->name('create');
-    Route::post('update/{id}', [DoctorController::class, 'update'])->name('edit');
-    Route::delete('{id}', [DoctorController::class, 'delete'])->name('delete');
 });
 
 // Appointment API
