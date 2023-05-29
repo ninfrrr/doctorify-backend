@@ -49,6 +49,5 @@ Route::prefix('doctor')->name('doctor.')->middleware('auth:sanctum')->group(func
 Route::prefix('appointment')->name('appointment.')->middleware('auth:sanctum')->group(function () {
     Route::get('', [AppointmentController::class, 'fetch'])->name('fetch');
     Route::post('', [AppointmentController::class, 'create'])->name('create');
-    Route::put('update/{id}', [AppointmentController::class, 'update'])->name('edit');
     Route::delete('{id}', [AppointmentController::class, 'delete'])->name('delete');
 });
