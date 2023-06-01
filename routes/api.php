@@ -49,7 +49,10 @@ Route::prefix('doctor')->name('doctor.')->middleware('auth:sanctum')->group(func
 
 // Appointment API
 Route::prefix('appointment')->name('appointment.')->middleware('auth:sanctum')->group(function () {
-    Route::get('', [AppointmentController::class, 'fetch'])->name('fetch');
+    Route::get('/all', [AppointmentController::class, 'fetch'])->name('fetch');
+    Route::get('', [AppointmentController::class, 'fetchById'])->name('fetchById');
     Route::post('', [AppointmentController::class, 'create'])->name('create');
+    Route::put('/{id}/accept', [AppointmentController::class, 'accept'])->name('accept');
+    Route::put('/{id}/reject', [AppointmentController::class, 'reject'])->name('reject');
     Route::delete('{id}', [AppointmentController::class, 'delete'])->name('delete');
 });

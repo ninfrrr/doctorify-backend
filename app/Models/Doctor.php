@@ -20,7 +20,6 @@ class Doctor extends Model
         'total_review',
     ];
 
-    // TODO: add relations
     public function specialist()
     {
         return $this->belongsTo(Specialist::class);

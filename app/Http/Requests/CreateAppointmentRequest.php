@@ -29,8 +29,9 @@ class CreateAppointmentRequest extends FormRequest
             'explanation' => 'required',
             'date' => 'required|date',
             'time' => 'required',
-            'location' => 'nullable',
+            'location' => 'nullable|string',
             'total_price' => 'nullable|integer',
+            'status' => 'nullable|string,'
         ];
     }
 }

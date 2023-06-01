@@ -9,7 +9,6 @@ use App\Helpers\ResponseFormatter;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Requests\CreateAppointmentRequest;
-use App\Http\Requests\UpdateAppointmentRequest;
 
 class AppointmentController extends Controller
 {
@@ -19,6 +18,22 @@ class AppointmentController extends Controller
             $appointment = Appointment::get();
 
             if ($appointment->count() < 1) {
+                throw new Exception('Appointment not found!');
+            }
+
+            return ResponseFormatter::success($appointment, 'Appointment found!');
+        } catch (Exception $e) {
+            return ResponseFormatter::error($e->getMessage(), 500);
+        }
+    }
+
+    public function fetchById()
+    {
+        try {
+            $user = Auth::user();
+            $appointment = Appointment::where('user_id', $user->id)->get();
+
+            if (!$appointment) {
                 throw new Exception('Appointment not found!');
             }
 
@@ -52,7 +67,45 @@ class AppointmentController extends Controller
         }
     }
 
-    public function delete($id)
+    public function accept($id)
+    {
+        try {
+            $appointment = Appointment::find($id);
+
+            if (!$appointment) {
+                throw new Exception('Appointment not found');
+            }
+
+            $appointment->update([
+                'status' => 'accept',
+            ]);
+
+            return ResponseFormatter::success($appointment, 'Appointment accepted!');
+        } catch (Exception $e) {
+            return ResponseFormatter::error($e->getMessage(), 500);
+        }
+    }
+
+    public function reject($id)
+    {
+        try {
+            $appointment = Appointment::find($id);
+
+            if (!$appointment) {
+                throw new Exception('Appointment not found');
+            }
+
+            $appointment->update([
+                'status' => 'reject',
+            ]);
+
+            return ResponseFormatter::success($appointment, 'Appointment rejected!');
+        } catch (Exception $e) {
+            return ResponseFormatter::error($e->getMessage(), 500);
+        }
+    }
+
+    public function delete(Request $request, $id)
     {
         try {
             $appointment = Appointment::find($id);

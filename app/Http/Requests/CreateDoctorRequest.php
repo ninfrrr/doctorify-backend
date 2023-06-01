@@ -29,8 +29,8 @@ class CreateDoctorRequest extends FormRequest
             'location' => 'required',
             'price' => 'integer',
             'review' => 'nullable',
-            'star' => 'numeric',
-            'total_review' => 'integer',
+            'star' => 'nullable|numeric',
+            'total_review' => 'nullable|integer',
         ];
     }
 }

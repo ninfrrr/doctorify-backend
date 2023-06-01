@@ -41,9 +41,6 @@ class DoctorController extends Controller
                 'location' => $request->location,
                 'price' => $request->price,
                 'specialist_id' => $request->specialist_id,
-                'review' => $request->review,
-                'star' => $request->star,
-                'total_review' => $request->total_review,
             ]);
 
             if (!$doctor) {

@@ -18,9 +18,9 @@ class Appointment extends Model
         'time',
         'location',
         'total_price',
+        'status',
     ];
 
-    // TODO: add relations
     public function doctor()
     {
         return $this->belongsTo(Doctor::class);
