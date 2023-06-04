@@ -185,6 +185,7 @@ return [
         /*
          * Package Service Providers...
          */
+        JoggApp\NaturalLanguage\NaturalLanguageServiceProvider::class,
 
         /*
          * Application Service Providers...
@@ -212,6 +213,7 @@ return [
 
     'aliases' => Facade::defaultAliases()->merge([
         // 'ExampleClass' => App\Example\ExampleClass::class,
+        'NaturalLanguage' => JoggApp\NaturalLanguage\Facades\NaturalLanguage::class,
     ])->toArray(),
 
 ];
