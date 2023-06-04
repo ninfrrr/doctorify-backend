@@ -9,6 +9,7 @@ use App\Helpers\ResponseFormatter;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\CreateDoctorRequest;
 use App\Http\Requests\UpdateDoctorRequest;
+use NaturalLanguage;
 
 class DoctorController extends Controller
 {
@@ -67,13 +68,23 @@ class DoctorController extends Controller
                 $path = $request->file('photo')->store('public/photos');
             }
 
+            $review = NaturalLanguage::sentiment($request->review);
+
+            if ($review['verdict'] == 'The sentiment of the given text is mostly negative') {
+                $review['verdict'] = 'negative';
+            } else if ($review['verdict'] == 'The sentiment of the given text is mostly positive') {
+                $review['verdict'] = 'positive';
+            } else {
+                $review['verdict'] = 'neutral';
+            }
+
             $doctor->update([
                 'name' => $request->name,
                 'photo' => isset($path) ? $path : $doctor->photo,
                 'location' => $request->location,
                 'price' => $request->price,
                 'specialist_id' => $request->specialist_id,
-                'review' => $request->review,
+                'review' => $review,
                 'star' => $request->star,
                 'total_review' => $request->total_review,
             ]);
