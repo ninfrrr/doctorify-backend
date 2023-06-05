@@ -4,6 +4,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\API\UserController;
 use App\Http\Controllers\API\DoctorController;
+use App\Http\Controllers\API\ReviewController;
 use App\Http\Controllers\API\SpecialistController;
 use App\Http\Controllers\API\AppointmentController;
 
@@ -55,4 +56,12 @@ Route::prefix('appointment')->name('appointment.')->middleware('auth:sanctum')->
     Route::put('/{id}/accept', [AppointmentController::class, 'accept'])->name('accept');
     Route::put('/{id}/reject', [AppointmentController::class, 'reject'])->name('reject');
     Route::delete('{id}', [AppointmentController::class, 'delete'])->name('delete');
+});
+
+// Review
+Route::prefix('review')->name('review.')->middleware('auth:sanctum')->group(function () {
+    Route::get('/all', [ReviewController::class, 'fetch'])->name('fetch');
+    Route::get('', [ReviewController::class, 'fetchById'])->name('fetchById');
+    Route::get('/doctor/{id}', [ReviewController::class, 'fetchByDoctorId'])->name('fetchByDoctorId');
+    Route::post('', [ReviewController::class, 'create'])->name('create');
 });
