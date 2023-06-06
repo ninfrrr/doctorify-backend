@@ -58,9 +58,6 @@ return [
             'prefix_indexes' => true,
             'strict' => true,
             'engine' => null,
-            'options' => extension_loaded('pdo_mysql') ? array_filter([
-                PDO::MYSQL_ATTR_SSL_CA => env('MYSQL_ATTR_SSL_CA'),
-            ]) : [],
         ],
 
         'pgsql' => [
@@ -76,6 +73,9 @@ return [
             'prefix_indexes' => true,
             'search_path' => 'public',
             'sslmode' => 'prefer',
+            'options' => extension_loaded('pdo_pgsql') ? array_filter([
+                PDO::PGSQL_ATTR_SSL_CA => env('PGSQL_ATTR_SSL_CA'),
+            ]) : [],
         ],
 
         'sqlsrv' => [
